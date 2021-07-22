@@ -73,7 +73,7 @@ $(function() {
 	simpleStore.init({
 
 		// brand can be text or image URL
-		brand : "OSINTCart",
+		brand : "SimpleStore",
 
 		// numder of products per row (accepts 1, 2 or 3)
 		numColumns : 3,

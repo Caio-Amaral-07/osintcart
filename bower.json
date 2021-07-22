@@ -1,11 +1,11 @@
 {
-    "name": "simpleStore",
+    "name": "OSINTCart",
     "description": "A clean, responsive storefront boilerplate with no database or backend.",
     "version": "1.1.1",
-    "homepage": "http://cdmedia.github.io/simplestore",
+    "homepage": "http://westcountylabs.github.io/simplestore",
     "repository": {
 	    "type": "git",
-	    "url": "https://github.com/cdmedia/simplestore"
+	    "url": "https://github.com/westcountylabs/simplestore"
 	},
     "main": "index.html",
     "license": "MIT",

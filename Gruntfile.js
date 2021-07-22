@@ -65,6 +65,7 @@
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-file-append');
+	grunt.loadNpmTasks('grunt-bower-install');
 
 	grunt.registerTask('default', ['uglify', 'cssmin', 'file_append', 'copy']);
  };

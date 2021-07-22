@@ -27,8 +27,8 @@
 			"options" : [
 				{ "Operating Systems" : "Windows,macOS,Linux" }
 			],
-                        "link" : "https://www.maltego.com/images/uploads/maltego-product-demo-event-logo.png",
-			"image" : "https://raw.githubusercontent.com/signalapp/Signal-Desktop/87d6a55ce87a3f09e34da1dbc9e69f400ac7e32d/images/signal-logo.svg",
+                        "link" : "https://www.maltego.com",
+			"image" : "https://www.maltego.com/images/uploads/maltego-product-demo-event-logo.png",
 			"description" : "Maltego is an open source intelligence and graphical link analysis tool for gathering and connecting information for investigative tasks. Maltego is a Java application that runs on Windows, Mac and Linux. Maltego is used by a broad range of users, ranging from security professionals to forensic investigators, investigative journalists, and researchers."
 		}
 	]

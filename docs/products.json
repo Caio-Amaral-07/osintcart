@@ -7,7 +7,7 @@
 				{ "Size" : "Android,iOS,Windows,macOS,Linux" }
 			],
                         "link" : "https://signal.org/",
-			"image" : "https://github.com/signalapp/Signal-Desktop/blob/87d6a55ce87a3f09e34da1dbc9e69f400ac7e32d/images/signal-logo.svg",
+			"image" : "https://raw.githubusercontent.com/signalapp/Signal-Desktop/87d6a55ce87a3f09e34da1dbc9e69f400ac7e32d/images/signal-logo.svg",
 			"description" : "Signal is a cross-platform centralized encrypted messaging service developed by the Signal Technology Foundation and Signal Messenger LLC. Users can send one-to-one and group messages, which can include files, voice notes, images and videos. It can also be used to make one-to-one and group voice and video calls, and the Android version can optionally function as an SMS app."
 		},
 		{
@@ -18,8 +18,7 @@
 				{ "Color" : "Blue,Red" }
 			],
 			"image" : "http://upload.wikimedia.org/wikipedia/commons/2/24/Blue_Tshirt.jpg",
-			"description" : "This is a really cool blue T-shirt",
-			"soldOut" : true
+			"description" : "This is a really cool blue T-shirt"
 		},
 		{
 			"name" : "Fun T-shirt",

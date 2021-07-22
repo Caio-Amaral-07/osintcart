@@ -4,30 +4,32 @@
 			"name" : "Signal Messenger",
 			"price" : "0.00",
 			"options" : [
-				{ "Size" : "Android,iOS,Windows,macOS,Linux" }
+				{ "Operating Systems" : "Android,iOS,Windows,macOS,Linux" }
 			],
                         "link" : "https://signal.org/",
 			"image" : "https://raw.githubusercontent.com/signalapp/Signal-Desktop/87d6a55ce87a3f09e34da1dbc9e69f400ac7e32d/images/signal-logo.svg",
 			"description" : "Signal is a cross-platform centralized encrypted messaging service developed by the Signal Technology Foundation and Signal Messenger LLC. Users can send one-to-one and group messages, which can include files, voice notes, images and videos. It can also be used to make one-to-one and group voice and video calls, and the Android version can optionally function as an SMS app."
 		},
 		{
-			"name" : "Cool T-shirt",
-			"price" : "15.99",
+			"name" : "Hunchly Desktop",
+			"price" : "129.99",
 			"options" : [
-				{ "Size" : "Small,Medium,Large" },
-				{ "Color" : "Blue,Red" }
+				{ "Browsers" : "Chrome, Chromium, Microsoft Edge, Brave" },
+				{ "Operating Systems" : "Windows,macOS,Linux" }
 			],
-			"image" : "http://upload.wikimedia.org/wikipedia/commons/2/24/Blue_Tshirt.jpg",
-			"description" : "This is a really cool blue T-shirt"
+                        "link" : "https://hunch.ly/",
+			"image" : "https://www.hunch.ly/images/logo.png",
+			"description" : "Hunchly automatically tracks the URL, timestamps, and hashes every page you visit during an investigation. This saves you hours in documentation time so you have more time for performing investigative work."
 		},
 		{
-			"name" : "Fun T-shirt",
-			"price" : "15.99",
+			"name" : "Maltego Community Edition",
+			"price" : "0.00",
 			"options" : [
-				{ "Size" : "Small,Medium,Large" }
+				{ "Operating Systems" : "Windows,macOS,Linux" }
 			],
-			"image" : "http://upload.wikimedia.org/wikipedia/commons/c/c6/Grey_Tshirt.jpg",
-			"description" : "This is another fun grey T-shirt"
+                        "link" : "https://www.maltego.com/images/uploads/maltego-product-demo-event-logo.png",
+			"image" : "https://raw.githubusercontent.com/signalapp/Signal-Desktop/87d6a55ce87a3f09e34da1dbc9e69f400ac7e32d/images/signal-logo.svg",
+			"description" : "Maltego is an open source intelligence and graphical link analysis tool for gathering and connecting information for investigative tasks. Maltego is a Java application that runs on Windows, Mac and Linux. Maltego is used by a broad range of users, ranging from security professionals to forensic investigators, investigative journalists, and researchers."
 		}
 	]
 }

@@ -12,6 +12,8 @@ a.hover{text-decoration:none}
 .simpleCart_shelfItem label{display:block;float:left;line-height:40px;margin-right:10px}
 .detail_thumb,.item_thumb{height:150px;display:block;margin:0 auto;padding-bottom:10px}
 .item_Quantity{display:inline-block;width:50px}
+.item_category{font-weight:300;font-size:16px;line-height:22px}
+.item_hostnation{font-weight:300;font-size:16px;line-height:22px}
 .item_price{font-weight:700;font-size:20px;line-height:22px}
 .item_description{margin-top:1rem;margin-bottom:1.5rem}
 .headerRow{display:table-row;font-weight:700;border-bottom:1px solid #e1e1e1}

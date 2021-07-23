@@ -19,7 +19,7 @@ var simpleStore = {
         JSONFile: "products.json",
         fadeSpeed: 200,
         buttonColor: null,
-        backgroundColor: null,
+        backgroundColor: "#000000",
         textColor: null,
         container: $('.simpleStore_container'),
         cartContainer: $('.simpleStore_cart_container'),
@@ -414,7 +414,7 @@ var simpleStore = {
 		// SimpleCart extend
 		simpleCart({
 			afterAdd: function() {
-				simpleStore.notifier('Item added to cart');
+				simpleStore.notifier('Item added to plan');
 			}
 		});
     },

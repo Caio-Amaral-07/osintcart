@@ -6,7 +6,7 @@
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta charset="utf-8">
     <title>OSINTCart</title>
-    <meta name="description" content="A clean, responsive storefront boilerplate with no database or backend">
+    <meta name="description" content="A one-stop shop for creating your OSINT investigation plan.">
     <meta name="author" content="Steve Trush at West County Labs">
 
     <!-- Mobile Specific Metas
@@ -36,7 +36,7 @@
         <div class="row">
             <a class="brand" href="#"></a>
             <a class="button button-primary u-pull-right simpleStore_viewCart">
-                <i class="fa fa-shopping-cart"></i> Cart <span class="simpleCart_total"></span>
+                <i class="fa fa-shopping-cart"></i> Plan <span class="simpleCart_total"></span>
             </a>
         </div>
         <div class="simpleStore_container"></div>
@@ -85,7 +85,7 @@
                         <input type="number" value="1" min="1" step="1" class="item_Quantity">
                     </div>
                     <div class="simpleStore_options"></div>
-                    <a class="item_add button u-pull-right" href="javascript:;">Add to Cart</a>
+                    <a class="item_add button u-pull-right" href="javascript:;">Add to Plan</a>
                 </div>
             </div>
         </div>
@@ -94,13 +94,13 @@
     <!-- Cart View -->
     <script id="cart-template" type="x-template">
         <div class="simpleStore_cart">
-            <h2>Cart</h2>
+            <h2>Plan</h2>
             <a href="#" class="close">&times;</a>
 
             <div class="row">
                 <div class="eight columns">
                     <div class="simpleCart_items"></div>
-                    <a href="javascript:;" class="simpleCart_empty u-pull-left">Empty Cart <i class="fa fa-trash-o"></i></a>
+                    <a href="javascript:;" class="simpleCart_empty u-pull-left">New Plan <i class="fa fa-trash-o"></i></a>
                 </div>
                 <div class="four columns">
                     <div class="cart_info">
@@ -119,7 +119,7 @@
                         <div class="cart_info_item cart_total"><b>Total:
                             <div class="simpleCart_grandTotal"></div>
                         </b></div>
-                        <a href="javascript:;" class="button button-primary simpleStore_checkout u-pull-right">Checkout <i class="fa fa-arrow-right"></i></a>
+                        <a href="javascript:;" class="button button-primary simpleStore_checkout u-pull-right">Generate Plan<i class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>

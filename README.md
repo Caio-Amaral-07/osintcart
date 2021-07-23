@@ -1,84 +1,11 @@
-**6/10/20 - UPDATES COMING SOON!**
 
-# simpleStore
+# OSINTCart
 
-[simpleStore](http://chrisdiana.github.io/simplestore) is a clean, responsive
-storefront boilerplate with no database you can setup in minutes. simpleStore is built on
+OSINTCart is built on [simpleStore](http://chrisdiana.github.io/simplestore), a clean, responsive
+storefront boilerplate with no database you can setup in minutes. simpleStore uses
 [simpleCart.js](http://simplecartjs.org) and [Skeleton](http://getskeleton.com)
 CSS Framework for a lightweight, fast, simple to use, and completely
 customizable experience.
-
-![simpleStore Screenshot](https://raw.githubusercontent.com/chrisdiana/simplestore/gh-pages/images/screenshot-v1.1-full.png)
-![simpleStore Cart Screenshot](https://raw.githubusercontent.com/chrisdiana/simplestore/gh-pages/images/screenshot-v1.1-cart.png)
-![simpleStore Detail Screenshot](https://raw.githubusercontent.com/chrisdiana/simplestore/gh-pages/images/screenshot-v1.1-detail.png)
-
----
-
-# Features
-
-* No Databases, all client-side (just simple HTML, CSS & Javascript)
-* Lightweight & Fast
-* Tax Rate Calculations
-* Unlimited product attributes
-* Shipping
-* Multiple Currencies
-* Payment Gateways (Paypal, Google Checkout, Amazon Payments)
-* For more features check out [simpleCart.js](http://simplecartjs.org)
-
-# Plugins
-
-* Google Sheets (Control products from a Google Sheet instead of JSON file)
-
-# Demo
-
-You can see a working demo [here](http://chrisdiana.github.io/simplestore/demo/)
-
-
-# Installation
-
-Install with Bower
-
-```
-bower install
-```
-
-or manually install using the latest [release](https://github.com/chrisdiana/simplestore/releases/latest)
-
-
-# Setup
-
-1.Make sure simpleStore is on a web server (any type will do as long as it can serve static web pages).
-
-2.Configure your payment options in `js/config.js`.
-
-```
-checkout: {
-	type: "PayPal" ,
-	email: "you@yours.com"
-},
-```
-
-3.Edit the `js/config.js` to your liking.
-
-4.Add additional products in the `products.json` file.
-
-# Using Plugins
-
-To use a plugin, add a reference just before your `config.js` file
-
-```
-<script src="plugins/google-sheets.js"></script>
-<script src="js/config.js"></script>
-```
-
-## HTML Version
-
-If you are looking for something more basic, check out the [HTML version on this
-branch](https://github.com/chrisdiana/simplestore/tree/simplestore-html).
-The HTML version uses plain HTML to build the store instead of a JSON
-file.
-
-Add additional products using the `<div class="simpleCart_shelfItem"></div>` tags.
 
 ## Credit where credit is due
 

@@ -81,6 +81,9 @@ $(function() {
 		// name of JSON file, located in directory root
 		JSONFile : "products.json"
 
+		//required for GoogleSheet database
+                spreadsheetID : "1y3aPg6fmTVusJzX0u2Pj8pMDPIxJCozpWlCx5fmSqmI"
+
 	});
 
 });

@@ -9,7 +9,7 @@
 var simpleStore = {
 
     products: [],
-    plugins: {},
+    plugins: {google: "../plugins/google-sheets/google-sheets.js"},
 
     // Default settings
     settings: {

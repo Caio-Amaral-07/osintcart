@@ -6,10 +6,15 @@
 * http://www.opensource.org/licenses/mit-license.php
 */
 
+
 var simpleStore = {
 
     products: [],
     plugins: {},
+    filters: {
+        category: [],
+        hostnation: [],
+    },
 
     // Default settings
     settings: {
@@ -88,10 +93,18 @@ var simpleStore = {
 
     renderProducts: function (products, s) {
 
-        var rowCount = 1,
-            numProducts = products.length,
-            numRows = Math.ceil(products.length / s.numColumns),
-            itemWidth;
+        var rowCount = 1;
+        var numProducts = 0; //products.length,
+
+        products.forEach(function (product, i) {
+            if (simpleStore.filters.category.length <= 0 || simpleStore.filters.category.indexOf(product.category.toLowerCase()) >= 0){
+		numProducts = numProducts + 1;
+		console.log(simpleStore.filters.category + " " + product.name + " " + i);
+	    }
+        });
+
+        var numRows = Math.ceil(numProducts / s.numColumns);
+        var itemWidth;
 
         s.cartContainer.hide();
         s.container.fadeOut(s.fadeSpeed, function () {
@@ -111,11 +124,12 @@ var simpleStore = {
                     itemWidth = widthClasses[k];
                 }
             }
-
+	    var index = 0;
             // List layout
             products.forEach(function (product, i) {
 
-				if (!product.soldOut) {
+				if (!product.soldOut && (simpleStore.filters.category.length <= 0 || simpleStore.filters.category.indexOf(product.category.toLowerCase()) >= 0)) {
+					console.log("Generating "+ product.name);
 					var tmpl = $('#products-template').html(),
 						$tmpl = $(tmpl);
 
@@ -133,15 +147,13 @@ var simpleStore = {
 					});
 
 					// Check where to add new item based on row
-					if (i === 0) {
-						i = 1;
-					}
-					if (i % (s.numColumns) === 0) {
-						rowCount++;
-					}
+
+					if (index > 0 && ((index % s.numColumns) === 0)) rowCount =  rowCount + 1;
 
 					// Append to appropriate container
 					$('.' + s.rowClass + rowCount).append($tmpl);
+
+					index = index + 1;
 				}
             });
         });
@@ -430,3 +442,10 @@ var simpleStore = {
         }
     }
 };
+
+function filterSelection(c){
+  if (c === 'all'){
+    simpleStore.filters.category = [];
+  } else simpleStore.filters.category = [c];
+  simpleStore.render("",simpleStore.settings);
+}

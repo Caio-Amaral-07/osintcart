@@ -280,7 +280,7 @@ Metadata
 
 ## Credit where credit is due
 
-From Rachael Cornejo and Thyne Boonmark at [Citizen Clinic Cybersecurity Education Center])(https://www.citizenclinic.io/Clinic_Infrastructure/OSINT_Evaluation/): "We extend our utmost thanks to the following people for providing invaluable input and advice on this project: Steve Trush, Citizen Clinic; Kristin Berdan, Citizen Clinic; Bill Marczak, Citizen Clinic & Citizen Lab; Justin Seitz, Hunch.ly; Michael Elsanadi, Syrian Archive; John Ortilla, Human Rights Investigations Lab at UC Berkeley Law."
+From Rachael Cornejo and Thyne Boonmark at [Citizen Clinic Cybersecurity Education Center](https://www.citizenclinic.io/Clinic_Infrastructure/OSINT_Evaluation/): "We extend our utmost thanks to the following people for providing invaluable input and advice on this project: Steve Trush, Citizen Clinic; Kristin Berdan, Citizen Clinic; Bill Marczak, Citizen Clinic & Citizen Lab; Justin Seitz, Hunch.ly; Michael Elsanadi, Syrian Archive; John Ortilla, Human Rights Investigations Lab at UC Berkeley Law."
 
 For further documentation on expanding/tweaking simpleStore, check out the
 framework/plugin pages.

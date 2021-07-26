@@ -13,7 +13,7 @@ var simpleStore = {
     plugins: {},
     filters: {
         category: [],
-        hostnation: [],
+        nation: [],
     },
 
     // Default settings
@@ -97,10 +97,15 @@ var simpleStore = {
         var numProducts = 0; //products.length,
 
         products.forEach(function (product, i) {
-            if (simpleStore.filters.category.length <= 0 || simpleStore.filters.category.indexOf(product.category.toLowerCase()) >= 0){
+
+		if(product.soldOut) return;
+
+		if(simpleStore.filters.category.length > 0 && simpleStore.filters.category.indexOf(product.category.toLowerCase()) < 0) return;
+
+		if(simpleStore.filters.nation.length > 0 && simpleStore.filters.nation.indexOf(product.hostnation.toLowerCase()) < 0) return;
+
 		numProducts = numProducts + 1;
-		console.log(simpleStore.filters.category + " " + product.name + " " + i);
-	    }
+
         });
 
         var numRows = Math.ceil(numProducts / s.numColumns);
@@ -128,33 +133,38 @@ var simpleStore = {
             // List layout
             products.forEach(function (product, i) {
 
-				if (!product.soldOut && (simpleStore.filters.category.length <= 0 || simpleStore.filters.category.indexOf(product.category.toLowerCase()) >= 0)) {
-					console.log("Generating "+ product.name);
-					var tmpl = $('#products-template').html(),
-						$tmpl = $(tmpl);
+				if(product.soldOut) return;
 
-					// Set item width
-					$tmpl.first().addClass(itemWidth);
+				if(simpleStore.filters.category.length > 0 && simpleStore.filters.category.indexOf(product.category.toLowerCase()) < 0) return;
 
-					// Insert data into template
-					simpleStore.insertData($tmpl, product);
+				if(simpleStore.filters.nation.length > 0 && simpleStore.filters.nation.indexOf(product.hostnation.toLowerCase()) < 0) return;
 
-					// Render detail view on hash change
-					var getDetail = $tmpl.find('.simpleStore_getDetail');
-					getDetail.on('click', function (e) {
-						e.preventDefault();
-						window.location.hash = 'product/' + product.id;
-					});
+				console.log("Generating "+ product.name);
+				var tmpl = $('#products-template').html(),
+					$tmpl = $(tmpl);
 
-					// Check where to add new item based on row
+				// Set item width
+				$tmpl.first().addClass(itemWidth);
 
-					if (index > 0 && ((index % s.numColumns) === 0)) rowCount =  rowCount + 1;
+				// Insert data into template
+				simpleStore.insertData($tmpl, product);
 
-					// Append to appropriate container
-					$('.' + s.rowClass + rowCount).append($tmpl);
+				// Render detail view on hash change
+				var getDetail = $tmpl.find('.simpleStore_getDetail');
+				getDetail.on('click', function (e) {
+					e.preventDefault();
+					window.location.hash = 'product/' + product.id;
+				});
 
-					index = index + 1;
-				}
+				// Check where to add new item based on row
+
+				if (index > 0 && ((index % s.numColumns) === 0)) rowCount =  rowCount + 1;
+
+				// Append to appropriate container
+				$('.' + s.rowClass + rowCount).append($tmpl);
+
+				index = index + 1;
+
             });
         });
     },
@@ -444,8 +454,33 @@ var simpleStore = {
 };
 
 function filterSelection(c){
-  if (c === 'all'){
-    simpleStore.filters.category = [];
-  } else simpleStore.filters.category = [c];
-  simpleStore.render("",simpleStore.settings);
+	simpleStore.filters.category = [];
+	simpleStore.filters.nation = [];
+//	this.document.getElementById('nationFilterBox').options[0].selected = true;
+	this.document.getElementById('nationFilterBox').selectedIndex = 0;
+	this.document.querySelectorAll('input[type=checkbox]').forEach(el => el.checked = false);
+	simpleStore.render("",simpleStore.settings);
 }
+
+function toggleCategory(element,c){
+	if (element.checked){ 
+		simpleStore.filters.category.push(c.toLowerCase());
+	}
+  	else{
+		var toRemove = simpleStore.filters.category.indexOf(c.toLowerCase());
+		if (toRemove >= 0) simpleStore.filters.category.splice(toRemove,1);
+	}
+	simpleStore.render("",simpleStore.settings);
+}
+
+$('#nationFilterBox').on('change', function (e) {
+	simpleStore.filters.nation = [];
+	var optionSelected = $("option:selected", this);
+	var valueSelected = this.value;    
+	if (!(valueSelected.toLowerCase() === "all")){
+		console.log("New nation: "+this.value);
+		simpleStore.filters.nation.push(this.value.toLowerCase());
+	}
+	simpleStore.render("",simpleStore.settings);
+    //alert(valueSelected);
+});

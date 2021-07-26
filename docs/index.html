@@ -40,12 +40,32 @@
             </a>
         </div>
 	<!-- Control buttons -->
-	<div id="myBtnContainer">
+	<div id="filterContainer">
   		<button class="btn active" onclick="filterSelection('all')"> Show all</button>
-  		<button class="btn" onclick="filterSelection('communications')"> Communications</button>
-  		<button class="btn" onclick="filterSelection('analysis')"> Analysis</button>
-  		<button class="btn" onclick="filterSelection('fruit')"> Fruit</button>
-  		<button class="btn" onclick="filterSelection('archiving')"> Archiving</button>
+		<table>
+		<tr>
+		<td>
+		<div id="categoryFilters" class="filter">
+		<p>Category</p>
+  			<label><input type="checkbox" onchange="toggleCategory(this,'analysis')"> Analysis</label>
+  			<label><input type="checkbox" onchange="toggleCategory(this,'archiving')"> Archiving</label>
+	  		<label><input type="checkbox" onchange="toggleCategory(this,'communications')"> Communications</label>
+  			<label><input type="checkbox" onchange="toggleCategory(this,'fruit')"> Fruit</label>
+	  		<label><input type="checkbox" onchange="toggleCategory(this,'privacy')"> Privacy</label>
+		</div>
+		</td>
+		<td>
+                <div id="nationFilters" class="filter">
+                <p>Provider Nation</p>
+		<select id="nationFilterBox" name="nations" class="filterbox">
+			<option value="all">All Nations</option>
+			<option value="Canada 🇨🇦"> Canada 🇨🇦</option>
+			<option value="Germany 🇩🇪"> Germany 🇩🇪</option>
+			<option value="Switzerland 🇨🇭"> Switzerland 🇨🇭</option>
+			<option value="USA 🇺🇸"> USA 🇺🇸</option>
+		</select>
+		</tr>
+		</table>
 	</div>
         <div class="simpleStore_container"></div>
         <div class="simpleStore_cart_container"></div>

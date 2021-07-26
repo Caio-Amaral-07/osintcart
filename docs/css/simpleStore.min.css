@@ -18,6 +18,8 @@ a.hover{text-decoration:none}
 .item_description{margin-top:1rem;margin-bottom:1.5rem}
 .headerRow{display:table-row;font-weight:700;border-bottom:1px solid #e1e1e1}
 .headerRow div{display:table-cell;padding:10px}
+.filter{color:#777}
+.filterbox{background:#fff;color:#777}
 .itemRow.odd{background:#111}
 .itemRow{display:table-row;border-bottom:1px solid #e1e1e1;background:#555}
 .itemRow:last-child{border-bottom:0 solid #000}

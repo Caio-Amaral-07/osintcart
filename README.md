@@ -65,11 +65,7 @@ Criteria developed by Citizen Clinic's Rachael Cornejo and Thyne Boonmark, with 
    </td>
   </tr>
   <tr>
-   <td>Location-
-<p>
-Based
-<p>
-Bans
+   <td>Location-Based Bans
    </td>
    <td>Is the service banned in any locations? Attempts to block?
    </td>

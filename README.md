@@ -284,6 +284,8 @@ Metadata
 
 ## Credit where credit is due
 
+From Rachael Cornejo and Thyne Boonmark at [Citizen Clinic Cybersecurity Education Center])(https://www.citizenclinic.io/Clinic_Infrastructure/OSINT_Evaluation/): "We extend our utmost thanks to the following people for providing invaluable input and advice on this project: Steve Trush, Citizen Clinic; Kristin Berdan, Citizen Clinic; Bill Marczak, Citizen Clinic & Citizen Lab; Justin Seitz, Hunch.ly; Michael Elsanadi, Syrian Archive; John Ortilla, Human Rights Investigations Lab at UC Berkeley Law."
+
 For further documentation on expanding/tweaking simpleStore, check out the
 framework/plugin pages.
 
@@ -311,4 +313,4 @@ If you do wish to contribute, please follow the [Airbnb Javascript Style Guide](
 
 ## List of contributors
 
-You can find the list of contributors [here](https://github.com/chrisdiana/simplestore/graphs/contributors).
+You can find the list of contributors [here](https://github.com/westcountylabs/osintcart/graphs/contributors).

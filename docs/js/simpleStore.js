@@ -94,7 +94,7 @@ var simpleStore = {
     renderProducts: function (products, s) {
 
         var rowCount = 1;
-        var numProducts = 0; //products.length,
+        var numProducts = 0; 
 
         products.forEach(function (product, i) {
 
@@ -438,8 +438,9 @@ var simpleStore = {
 
 		// SimpleCart extend
 		simpleCart({
-			afterAdd: function() {
-				simpleStore.notifier('Item added to plan');
+			afterAdd: function(e) {
+				if (e == null) simpleStore.notifier('Item already part of plan!');
+				else simpleStore.notifier('Item added to plan');
 			}
 		});
     },

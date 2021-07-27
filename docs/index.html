@@ -36,7 +36,7 @@
         <div class="row">
             <a class="brand" href="#"></a>
             <a class="button button-primary u-pull-right simpleStore_viewCart">
-                <i class="fa fa-shopping-cart"></i> Plan <span class="simpleCart_total"></span>
+                <i class="fa fa-user-secret"></i> View Plan (<span class="simpleCart_quantity"></span> items)
             </a>
         </div>
 	<!-- Control buttons -->
@@ -64,6 +64,8 @@
 			<option value="Switzerland 🇨🇭"> Switzerland 🇨🇭</option>
 			<option value="USA 🇺🇸"> USA 🇺🇸</option>
 		</select>
+		</div>
+		</td>
 		</tr>
 		</table>
 	</div>
@@ -115,8 +117,8 @@
                     <h5 class="item_name"></h5>
 
                     <p class="item_description"></p>
-		    <span class="item_category"></span>
-		    <span class="item_hostnation"></span>
+		  		  <span class="item_category"></span>
+		 		   <span class="item_hostnation"></span>
                     <span class="item_price"></span>
 
                     <div class="qty">
@@ -133,7 +135,7 @@
     <!-- Cart View -->
     <script id="cart-template" type="x-template">
         <div class="simpleStore_cart">
-            <h2>Plan</h2>
+            <h2>Investigation Plan</h2>
             <a href="#" class="close">&times;</a>
 
             <div class="row">
@@ -143,21 +145,9 @@
                 </div>
                 <div class="four columns">
                     <div class="cart_info">
-                        <div class="cart_info_item cart_itemcount">Items:
-                            <div class="simpleCart_quantity"></div>
+                        <div class="cart_info_item cart_itemcount"><b>Items:
+                            <div class="simpleCart_quantity"></div></b>
                         </div>
-                        <div class="cart_info_item cart_taxrate">Tax Rate:
-                            <div class="simpleCart_taxRate"></div>
-                        </div>
-                        <div class="cart_info_item cart_tax">Tax:
-                            <div class="simpleCart_tax"></div>
-                        </div>
-                        <div class="cart_info_item cart_shipping">Shipping:
-                            <div class="simpleCart_shipping"></div>
-                        </div>
-                        <div class="cart_info_item cart_total"><b>Total:
-                            <div class="simpleCart_grandTotal"></div>
-                        </b></div>
                         <a href="javascript:;" class="button button-primary simpleStore_checkout u-pull-right">Generate Plan<i class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -188,7 +178,7 @@
 <!-- Scripts
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="js/simpleCart.min.js"></script>
+<script src="js/simpleCart.js"></script>
 <script src="js/simpleStore.js"></script>
 <script src="plugins/google-sheets/google-sheets.js"></script>
 <script src="js/config.js"></script>

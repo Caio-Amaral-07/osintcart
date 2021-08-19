@@ -82,7 +82,8 @@ $(function() {
 		JSONFile : "products.json",
 
 		//required for GoogleSheet database
-		spreadsheetID : "1y3aPg6fmTVusJzX0u2Pj8pMDPIxJCozpWlCx5fmSqmI"
+		spreadsheetID : "1y3aPg6fmTVusJzX0u2Pj8pMDPIxJCozpWlCx5fmSqmI",
+		sheetkey : "AIzaSyCSf7mq5cKvMzyCC5MdYi0vYZnYOJohytg"
 
 	});
 

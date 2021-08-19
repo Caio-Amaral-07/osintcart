@@ -16,10 +16,10 @@ simpleStore.plugins.google = (function() {
 
 		verify = typeof verify !== 'undefined' ? verify : false;
 
-		var hostname = "https://spreadsheets.google.com";
-		var format = "json";
-		var spreadsheetURL = hostname + "/feeds/worksheets/" + s.spreadsheetID + "/public/full?alt=" + format;
-		var mainsheetURL = hostname + "/feeds/list/" + s.spreadsheetID + "/od6/public/values?alt=" + format;
+		var hostname =  "https://sheets.googleapis.com/v4"; 
+
+		var spreadsheetURL = hostname + "/spreadsheets/" + s.spreadsheetID + "?key="+s.sheetkey;
+
 		var settingsSheetName = "Settings";
 		var productsSheetName = "Products";
 		var sheetIDs = {};
@@ -29,14 +29,12 @@ simpleStore.plugins.google = (function() {
 			$.getJSON(url)
 				.done(function(data) {
 
-					var sheets = data.feed.entry;
+					var sheets = data.sheets;
 
 					$(sheets).each(function(i, sheet) {
 
-						var title = sheet.title.$t;
-						var id = sheet.id.$t;
-						var sheetID = id.substr(id.lastIndexOf('/') + 1);
-
+						var title = sheet.title;
+						var sheetID = sheet.sheetId;
 						if(title == settingsSheetName) {
 							sheetIDs.settingsSheetID = sheetID;
 						}
@@ -44,24 +42,24 @@ simpleStore.plugins.google = (function() {
 							sheetIDs.productsSheetID  = sheetID;
 						}
 					});
-					callback(sheetIDs.settingsSheetID);
+					callback();
 					loadProductData(sheetIDs.productsSheetID);
 				});
 		}
 
-		function loadSiteSettings (id, callback) {
+		function loadSiteSettings (callback) {
 
-			var settingsSheetURL = hostname + "/feeds/list/" + s.spreadsheetID + "/" + id + "/public/values?alt=" + format;
+			var settingsSheetURL = hostname + "/spreadsheets/" + s.spreadsheetID + "/values/"+settingsSheetName+"?key="+s.sheetkey;
 
 			$.getJSON(settingsSheetURL)
 				.done(function(data) {
-					var data = data.feed.entry;
+					var data = data.values;
 					var s = simpleStore.settings;
 
-					if(data[0]) {
+					if(data[1]) {
 
-						var siteName = data[0].gsx$sitenametextorimagelink.$t;
-						var columns = data[0].gsx$columns123.$t;
+						var siteName = data[1][0];
+						var columns = data[1][1];
 
 						if (siteName) {
 							s.brand = siteName;
@@ -77,18 +75,18 @@ simpleStore.plugins.google = (function() {
 
 		function loadProductData (id) {
 
-			var productsSheetURL = hostname + "/feeds/list/" + s.spreadsheetID + "/" + id + "/public/values?alt=" + format;
+			var productsSheetURL = hostname + "/spreadsheets/" + s.spreadsheetID+ "/values/"+productsSheetName+"?key="+s.sheetkey;
 
 			// Get Main Sheet Products data
 			$.getJSON(productsSheetURL)
 				.done(function(data) {
 
-					var productsData = data.feed.entry;
+					var productsData = data.values;
 
 					// Build products
 					$(productsData).each(function(i) {
-
-						var options = this.gsx$options.$t;
+						if ( i == 0 ) return;
+						var options = this[4];
 						var setOptions = function(options) {
 							var productOptions = [];
 							if(options) {
@@ -108,13 +106,13 @@ simpleStore.plugins.google = (function() {
 
 						// Get product values
 						var product = {
-							name : this.gsx$name.$t,
-							category : this.gsx$category.$t,
-							price : this.gsx$price.$t,
-							description : this.gsx$description.$t,
-							hostnation : this.gsx$hostnation.$t,
+							name : this[1],
+							category : this[3],
+							price : this[2],
+							description : this[5],
+							hostnation : this[11],
 							options : setOptions(options),
-							image : this.gsx$image.$t
+							image : this[6]
 						};
 
 						if (verify) {

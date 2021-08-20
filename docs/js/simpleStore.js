@@ -87,7 +87,15 @@ var simpleStore = {
         tmpl.find('.item_price').text(product.price);
         tmpl.find('.item_category').text(product.category);
         tmpl.find('.item_hostnation').text(product.hostnation);
+        tmpl.find('.item_productid').text(product.id);
+        
+        var link = $('<a />');
+        link.attr('href',product.link);
+        link.attr('target',"_blank");
+        link.text(product.link);
 
+        tmpl.find('.item_link').append(link);
+        //tmpl.find('.item_link').text(product.link);
         tmpl.find('.item_description').text(product.description);
     },
 
@@ -303,12 +311,14 @@ var simpleStore = {
     },
 
 	checkout : function (s, checkoutData) {
+        console.log("attempt to checkout!");
 		if (!$.isEmptyObject(checkoutData)) {
+            console.log("ok, we have checkoutData");
         	simpleCart.checkout();
-			s.cartContainer.fadeOut(s.fadeSpeed, function () {
+			/* s.cartContainer.fadeOut(s.fadeSpeed, function () {
 				s.container.html('<i class="fa fa-spin fa-circle-o-notch loader"></i>');
 				s.container.fadeIn(s.fadeSpeed);
-			});
+			});*/
 		}
 	},
 
@@ -328,27 +338,7 @@ var simpleStore = {
     validatePrices : function (s) {
         var checkoutData = JSON.parse(localStorage.simpleCart_items),
 			errorMsg = 'There was an error validating your cart.';
-
-		if (s.mode === "JSON") {
-			 $.get(s.JSONFile)
-				.success(function () {
-					$.getJSON(s.JSONFile, function (data) {
-						var JSONData = data.products;
-						if (simpleStore.verifyCheckoutData(checkoutData, JSONData, true)) {
-        					simpleStore.checkout(s, checkoutData);
-						} else {
-							simpleStore.renderError(s, errorMsg);
-						}
-					})
-                	.fail(function () { simpleStore.handleFailure(s, errorMsg); });
-				})
-                .fail(function () { simpleStore.handleFailure(s, errorMsg); });
-		} else {
-			var plugin = s.mode.toLowerCase();
-			if(simpleStore.plugins[plugin]) {
-				simpleStore.plugins[plugin].validate(checkoutData);
-			}
-		}
+        simpleStore.checkout(s, checkoutData);
     },
 
     setProducts: function (products, s) {

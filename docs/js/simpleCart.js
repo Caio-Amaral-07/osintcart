@@ -84,13 +84,14 @@
 
 				// default options
 				settings = {
-					checkout				: { type: "PayPal", email: "you@yours.com" },
+					checkout				: { type: "GenerateHTML"},
 					currency				: "USD",
 					language				: "english-us",
 
 					cartStyle				: "div",
 					cartColumns			: [
 						{ attr: "name", label: "Name" },
+						{ attr: "productid", label: "ProductId"},
 						{ attr: "price", label: "Price", view: 'currency' },
 						{ view: "decrement", label: false },
 						{ attr: "quantity", label: "Qty" },
@@ -99,7 +100,7 @@
 						{ view: "remove", text: "Remove", label: false }
 					],
 
-					excludeFromCheckout	: ['thumb'],
+					excludeFromCheckout	: ['thumb','productid'],
 
 					shippingFlatRate		: 0,
 					shippingQuantityRate	: 0,
@@ -678,8 +679,16 @@
 					// cycle through the columns to create each cell for the item
 					for (j = 0, jlen = settings.cartColumns.length; j < jlen; j += 1) {
 						column	= cartColumn(settings.cartColumns[j]);
-						klass	= "item-" + (column.attr || (isString(column.view) ? column.view : column.label || column.text || "cell")) + " " + column.className;
-						content = cartCellView(item, column);
+						var klass	= "item-" + (column.attr || (isString(column.view) ? column.view : column.label || column.text || "cell")) + " " + column.className;
+						var content = "";
+						if (klass.trim().localeCompare("item-name") == 0){
+							//console.log("<a href='/#product/"+item.get("productid")+"'>"+cartCellView(item, column)+"</a>");
+							content = "<a href='/#product/"+item.get("productid")+"'>"+cartCellView(item, column)+"</a>";
+						} else if (klass.trim().localeCompare("item-productid") == 0) {
+							continue;
+						} else {
+							content = cartCellView(item, column);
+						}
 						cell	= simpleCart.$create(TD).addClass(klass).html(content);
 
 						row.append(cell);
@@ -881,25 +890,37 @@
 
 			simpleCart.extend({
 				checkout: function () {
+					//console.log("Trying to generate a plan!");
 					if (settings.checkout.type.toLowerCase() === 'custom' && isFunction(settings.checkout.fn)) {
 						settings.checkout.fn.call(simpleCart,settings.checkout);
 					} else if (isFunction(simpleCart.checkout[settings.checkout.type])) {
 						var checkoutData = simpleCart.checkout[settings.checkout.type].call(simpleCart,settings.checkout);
-						
 						// if the checkout method returns data, try to send the form
 						if( checkoutData.data && checkoutData.action && checkoutData.method ){
 							// if no one has any objections, send the checkout form
 							if( false !== simpleCart.trigger('beforeCheckout', [checkoutData.data]) ){
-								simpleCart.generateAndSendForm( checkoutData );
+								//simpleCart.generateAndSendForm( checkoutData );
+								var win = window.open("", "OSINTCart Plan", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=800,height=800,top="+(screen.height-400)+",left="+(screen.width-840));
+								win.document.body.innerHTML = simpleCart.generateHTML( checkoutData );
+								return;
 							}
 						}
 						
 					} else {
+						console.log("checkout: error");
 						simpleCart.error("No Valid Checkout Method Specified");
 					}
 				},
 				extendCheckout: function (methods) {
 					return simpleCart.extend(simpleCart.checkout, methods);
+				},
+				generateHTML: function (opts) {
+					var webpage = "<p>";
+					simpleCart.each(opts.data, function (val, x, name) {
+						if(name.startsWith('item_name')) webpage = webpage + "<hr>";
+						webpage = webpage + "\t<div name='"+name+"'>"+val+"</div><br>\n";
+					});
+					return webpage;
 				},
 				generateAndSendForm: function (opts) {
 					var form = simpleCart.$create("form");
@@ -918,216 +939,37 @@
 			});
 
 			simpleCart.extendCheckout({
-				PayPal: function (opts) {
-					// account email is required
-					if (!opts.email) {
-						return simpleCart.error("No email provided for PayPal checkout");
-					}
+				GenerateHTML: function(opts) {
 
-					// build basic form options
-					var data = {
-							  cmd			: "_cart"
-							, upload		: "1"
-							, currency_code : simpleCart.currency().code
-							, business		: opts.email
-							, rm			: opts.method === "GET" ? "0" : "2"
-							, tax_cart		: (simpleCart.tax()*1).toFixed(2)
-							, handling_cart : (simpleCart.shipping()*1).toFixed(2)
-							, charset		: "utf-8"
-						},
-						action = opts.sandbox ? "https://www.sandbox.paypal.com/cgi-bin/webscr" : "https://www.paypal.com/cgi-bin/webscr",
-						method = opts.method === "GET" ? "GET" : "POST";
-
-
-					// check for return and success URLs in the options
-					if (opts.success) {
-						data['return'] = opts.success;
-					}
-					if (opts.cancel) {
-						data.cancel_return = opts.cancel;
-					}
-					if (opts.notify) {
-						data.notify_url = opts.notify;
-					}
-
+					var data = {};
 
 					// add all the items to the form data
 					simpleCart.each(function (item,x) {
 						var counter = x+1,
 							item_options = item.options(),
-							optionCount = 0,
 							send;
 	
 						// basic item data
-						data["item_name_" + counter] = item.get("name");
-						data["quantity_" + counter] = item.quantity();
-						data["amount_" + counter] = (item.price()*1).toFixed(2);
-						data["item_number_" + counter] = item.get("item_number") || counter;
-
-
+						data["item_name_" + counter] = item.get('name');
 						// add the options
 						simpleCart.each(item_options, function (val,k,attr) {
-							// paypal limits us to 10 options
-							if (k < 10) {
-		
-								// check to see if we need to exclude this from checkout
-								send = true;
-								simpleCart.each(settings.excludeFromCheckout, function (field_name) {
-									if (field_name === attr) { send = false; }
-								});
-								if (send) {
-										optionCount += 1;
-										data["on" + k + "_" + counter] = attr;
-										data["os" + k + "_" + counter] = val;
-								}
-	
-							}
-						});
-
-						// options count
-						data["option_index_"+ x] = Math.min(10, optionCount);
-					});
-
-
-					// return the data for the checkout form
-					return {
-						  action	: action
-						, method	: method
-						, data		: data
-					};
-
-				},
-
-
-				GoogleCheckout: function (opts) {
-					// account id is required
-					if (!opts.merchantID) {
-						return simpleCart.error("No merchant id provided for GoogleCheckout");
-					}
-
-					// google only accepts USD and GBP
-					if (simpleCart.currency().code !== "USD" && simpleCart.currency().code !== "GBP") {
-						return simpleCart.error("Google Checkout only accepts USD and GBP");
-					}
-
-					// build basic form options
-					var data = {
-							// TODO: better shipping support for this google
-							  ship_method_name_1	: "Shipping"
-							, ship_method_price_1	: simpleCart.shipping()
-							, ship_method_currency_1: simpleCart.currency().code
-							, _charset_				: ''
-						},
-						action = "https://checkout.google.com/api/checkout/v2/checkoutForm/Merchant/" + opts.merchantID,
-						method = opts.method === "GET" ? "GET" : "POST";
-
-
-					// add items to data
-					simpleCart.each(function (item,x) {
-						var counter = x+1,
-							options_list = [],
-							send;
-						data['item_name_' + counter]		= item.get('name');
-						data['item_quantity_' + counter]	= item.quantity();
-						data['item_price_' + counter]		= item.price();
-						data['item_currency_ ' + counter]	= simpleCart.currency().code;
-						data['item_tax_rate' + counter]		= item.get('taxRate') || simpleCart.taxRate();
-
-						// create array of extra options
-						simpleCart.each(item.options(), function (val,x,attr) {
-							// check to see if we need to exclude this from checkout
 							send = true;
 							simpleCart.each(settings.excludeFromCheckout, function (field_name) {
 								if (field_name === attr) { send = false; }
 							});
 							if (send) {
-								options_list.push(attr + ": " + val);
-							}
+								data[attr + "_"+counter] = val;
+							}	
 						});
-
-						// add the options to the description
-						data['item_description_' + counter] = options_list.join(", ");
 					});
 
 					// return the data for the checkout form
 					return {
-						  action	: action
-						, method	: method
+						  action	: "None"
+						, method	: "None"
 						, data		: data
 					};
-
-
 				},
-
-
-				AmazonPayments: function (opts) {
-					// required options
-					if (!opts.merchant_signature) {
-						return simpleCart.error("No merchant signature provided for Amazon Payments");
-					}
-					if (!opts.merchant_id) {
-						return simpleCart.error("No merchant id provided for Amazon Payments");
-					}
-					if (!opts.aws_access_key_id) {
-						return simpleCart.error("No AWS access key id provided for Amazon Payments");
-					}
-
-
-					// build basic form options
-					var data = {
-							  aws_access_key_id:	opts.aws_access_key_id
-							, merchant_signature:	opts.merchant_signature
-							, currency_code:		simpleCart.currency().code
-							, tax_rate:				simpleCart.taxRate()
-							, weight_unit:			opts.weight_unit || 'lb'
-						},
-						action = "https://payments" + (opts.sandbox ? "-sandbox" : "") + ".amazon.com/checkout/" + opts.merchant_id,
-						method = opts.method === "GET" ? "GET" : "POST";
-
-
-					// add items to data
-					simpleCart.each(function (item,x) {
-						var counter = x+1,
-							options_list = [];
-						data['item_title_' + counter]			= item.get('name');
-						data['item_quantity_' + counter]		= item.quantity();
-						data['item_price_' + counter]			= item.price();
-						data['item_sku_ ' + counter]			= item.get('sku') || item.id();
-						data['item_merchant_id_' + counter]	= opts.merchant_id;
-						if (item.get('weight')) {
-							data['item_weight_' + counter]		= item.get('weight');
-						}
-						if (settings.shippingQuantityRate) {
-							data['shipping_method_price_per_unit_rate_' + counter] = settings.shippingQuantityRate;
-						}
-
-
-						// create array of extra options
-						simpleCart.each(item.options(), function (val,x,attr) {
-							// check to see if we need to exclude this from checkout
-							var send = true;
-							simpleCart.each(settings.excludeFromCheckout, function (field_name) {
-								if (field_name === attr) { send = false; }
-							});
-							if (send && attr !== 'weight' && attr !== 'tax') {
-								options_list.push(attr + ": " + val);
-							}
-						});
-
-						// add the options to the description
-						data['item_description_' + counter] = options_list.join(", ");
-					});
-
-					// return the data for the checkout form
-					return {
-						  action	: action
-						, method	: method
-						, data		: data
-					};
-
-				},
-
-
 				SendForm: function (opts) {
 					// url required
 					if (!opts.url) {
@@ -1145,7 +987,7 @@
 						action = opts.url,
 						method = opts.method === "GET" ? "GET" : "POST";
 
-
+					console.log("send form to zap: "+action)
 					// add items to data
 					simpleCart.each(function (item,x) {
 						var counter = x+1,
@@ -1171,7 +1013,6 @@
 						data['item_options_' + counter] = options_list.join(", ");
 					});
 
-
 					// check for return and success URLs in the options
 					if (opts.success) {
 						data['return'] = opts.success;
@@ -1191,8 +1032,6 @@
 						, data		: data
 					};
 				}
-
-
 			});
 
 

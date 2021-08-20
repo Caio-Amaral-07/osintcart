@@ -14,8 +14,10 @@ a.hover{text-decoration:none}
 .item_Quantity{display:inline-block;width:50px}
 .item_category{font-weight:300;font-size:16px;line-height:22px}
 .item_hostnation{font-weight:300;font-size:16px;line-height:22px}
+.item_link{margin-top:1rem;margin-bottom:1.5rem}
 .item_price{font-weight:700;font-size:20px;line-height:22px}
 .item_description{margin-top:1rem;margin-bottom:1.5rem}
+.item_productid{display:none}
 .headerRow{display:table-row;font-weight:700;border-bottom:1px solid #e1e1e1}
 .headerRow div{display:table-cell;padding:10px}
 .filter{color:#777}

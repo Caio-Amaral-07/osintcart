@@ -106,11 +106,13 @@ simpleStore.plugins.google = (function() {
 
 						// Get product values
 						var product = {
+							productid : 1,
 							name : this[1],
 							category : this[3],
 							price : this[2],
 							description : this[5],
 							hostnation : this[11],
+							link : this[10],
 							options : setOptions(options),
 							image : this[6]
 						};

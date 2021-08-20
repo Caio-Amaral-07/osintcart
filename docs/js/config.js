@@ -6,7 +6,7 @@ $(function() {
 	    cartColumns: [
 	        { attr: "name" , label: "Name" },
 	        { attr: "category" , label: "Category"},
-	       // { view: "decrement" , label: false },
+	        { attr: "productid" , label: false },
 	        { attr: "hostnation" , label: "Provider Nation" },
 	       // { view: "increment" , label: false },
 	      //  { attr: "total" , label: "SubTotal", view: 'currency' },
@@ -18,8 +18,7 @@ $(function() {
 
 	    // how simpleCart should checkout, see the checkout reference for more info
 	    checkout: {
-	        type: "PayPal" ,
-	        email: "you@yours.com"
+	        type: "GenerateHTML"
 	    },
 
 	    // set the currency, see the currency reference for more info
@@ -35,7 +34,8 @@ $(function() {
 	    // array of item fields that will not be sent to checkout
 	    excludeFromCheckout: [
 	    	'qty',
-	    	'thumb'
+	    	'thumb',
+	    	'productid'
 	    ],
 
 	    // custom function to add shipping cost

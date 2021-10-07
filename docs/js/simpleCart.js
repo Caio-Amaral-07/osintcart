@@ -92,24 +92,10 @@
 					cartColumns			: [
 						{ attr: "name", label: "Name" },
 						{ attr: "productid", label: "ProductId"},
-						{ attr: "price", label: "Price", view: 'currency' },
-						{ view: "decrement", label: false },
-						{ attr: "quantity", label: "Qty" },
-						{ view: "increment", label: false },
-						{ attr: "total", label: "SubTotal", view: 'currency' },
 						{ view: "remove", text: "Remove", label: false }
 					],
 
 					excludeFromCheckout	: ['thumb','productid'],
-
-					shippingFlatRate		: 0,
-					shippingQuantityRate	: 0,
-					shippingTotalRate		: 0,
-					shippingCustom		: null,
-
-					taxRate				: 0,
-					
-					taxShipping			: false,
 
 					data				: {}
 
@@ -370,7 +356,7 @@
 				},
 
 				grandTotal: function () {
-					return simpleCart.total() + simpleCart.tax() + simpleCart.shipping();
+					return simpleCart.total();
 				},
 
 
@@ -503,57 +489,6 @@
 					try { console.log("simpleCart(js) Error: " + msg); } catch (e) {}
 					simpleCart.trigger('error', [message]);
 				}
-			});
-
-
-			/*******************************************************************
-			 *	TAX AND SHIPPING
-			 *******************************************************************/
-			simpleCart.extend({
-
-				// TODO: tax and shipping
-				tax: function () {
-					var totalToTax = settings.taxShipping ? simpleCart.total() + simpleCart.shipping() : simpleCart.total(),
-						cost = simpleCart.taxRate() * totalToTax;
-					
-					simpleCart.each(function (item) {
-						if (item.get('tax')) {
-							cost += item.get('tax');
-						} else if (item.get('taxRate')) {
-							cost += item.get('taxRate') * item.total();
-						}
-					});
-					return parseFloat(cost);
-				},
-				
-				taxRate: function () {
-					return settings.taxRate || 0;
-				},
-
-				shipping: function (opt_custom_function) {
-
-					// shortcut to extend options with custom shipping
-					if (isFunction(opt_custom_function)) {
-						simpleCart({
-							shippingCustom: opt_custom_function
-						});
-						return;
-					}
-
-					var cost = settings.shippingQuantityRate * simpleCart.quantity() +
-							settings.shippingTotalRate * simpleCart.total() +
-							settings.shippingFlatRate;
-
-					if (isFunction(settings.shippingCustom)) {
-						cost += settings.shippingCustom.call(simpleCart);
-					}
-
-					simpleCart.each(function (item) {
-						cost += parseFloat(item.get('shipping') || 0);
-					});
-					return parseFloat(cost);
-				}
-
 			});
 
 			/*******************************************************************
@@ -842,7 +777,7 @@
 
 				// special fields for items
 				reservedFields: function () {
-					return ['quantity', 'id', 'item_number', 'price', 'name', 'shipping', 'tax', 'taxRate'];
+					return ['quantity', 'id', 'item_number', 'price', 'name'];
 				},
 
 				// return values for all reserved fields if they exist
@@ -979,9 +914,6 @@
 					// build basic form options
 					var data = {
 							  currency	: simpleCart.currency().code
-							, shipping	: simpleCart.shipping()
-							, tax		: simpleCart.tax()
-							, taxRate	: simpleCart.taxRate()
 							, itemCount : simpleCart.find({}).length
 						},
 						action = opts.url,
@@ -1534,15 +1466,6 @@
 					}
 					, items: function (selector) {
 						simpleCart.writeCart(selector);
-					}
-					, tax: function () {
-						return simpleCart.toCurrency(simpleCart.tax());
-					}
-					, taxRate: function () {
-						return simpleCart.taxRate().toFixed();
-					}
-					, shipping: function () {
-						return simpleCart.toCurrency(simpleCart.shipping());
 					}
 					, grandTotal: function () {
 						return simpleCart.toCurrency(simpleCart.grandTotal());

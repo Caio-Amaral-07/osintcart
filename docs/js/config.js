@@ -8,8 +8,6 @@ $(function() {
 	        { attr: "category" , label: "Category"},
 	        { attr: "productid" , label: false },
 	        { attr: "hostnation" , label: "Provider Nation" },
-	       // { view: "increment" , label: false },
-	      //  { attr: "total" , label: "SubTotal", view: 'currency' },
 	        { view: "remove" , text: "Remove" , label: "      " }
 	    ],
 
@@ -37,24 +35,6 @@ $(function() {
 	    	'thumb',
 	    	'productid'
 	    ],
-
-	    // custom function to add shipping cost
-	    shippingCustom: null,
-
-	    // flat rate shipping option
-	    shippingFlatRate: 0,
-
-	    // added shipping based on this value multiplied by the cart quantity
-	    shippingQuantityRate: 0,
-
-	    // added shipping based on this value multiplied by the cart subtotal
-	    shippingTotalRate: 0,
-
-	    // tax rate applied to cart subtotal
-	    taxRate: 0,
-
-	    // true if tax should be applied to shipping
-	    taxShipping: false,
 
 	    // event callbacks
 	    beforeAdd               	: null,

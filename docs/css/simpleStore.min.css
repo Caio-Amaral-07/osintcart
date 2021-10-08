@@ -2,10 +2,10 @@
 select{display:block;float:left;margin-right:10px}
 a.hover{text-decoration:none}
 .simpleStore{margin-top:20px}
-.brand{display:block;float:left;text-decoration:none;color:#000}
+.brand{display:block;float:left;text-decoration:none;color:#FFF}
 .brand:hover{color:#777}
 .brand img{max-height:50px}
-.simpleCart_shelfItem{border:1px solid #efefef;padding:25px 18px 10px 18px;margin:15px;background:#222222}
+.simpleCart_shelfItem{border:1px solid #efefef;padding:25px 18px 10px 18px;margin:15px;background:#111111}
 .simpleCart_items{display:table;border-collapse:collapse;width:100%;min-height:20px;margin-bottom:50px}
 .simpleCart_items div:first-child{width:100%}
 .simpleCart_decrement,.simpleCart_increment{font-size:18px;line-height:5px;text-decoration:none}

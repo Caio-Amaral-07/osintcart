@@ -48,26 +48,42 @@
 		<tr>
 		<td>
 		<div id="categoryFilters" class="filter">
-		<p>Category</p>
-  			<label><input type="checkbox" onchange="toggleCategory(this,'analysis')"> Analysis</label>
-  			<label><input type="checkbox" onchange="toggleCategory(this,'archiving')"> Archiving</label>
-	  		<label><input type="checkbox" onchange="toggleCategory(this,'communications')"> Communications</label>
-  			<label><input type="checkbox" onchange="toggleCategory(this,'fruit')"> Information Source</label>
-	  		<label><input type="checkbox" onchange="toggleCategory(this,'privacy')"> Privacy</label>
+		<p><strong>Category</strong></p>
+  			<label><input type="checkbox" onchange="toggleCheck(this,'category','analysis')"> Analysis</label>
+  			<label><input type="checkbox" onchange="toggleCheck(this,'category','archiving')"> Archiving</label>
+	  		<label><input type="checkbox" onchange="toggleCheck(this,'category','communications')"> Communications</label>
+  			<label><input type="checkbox" onchange="toggleCheck(this,'category','information source')"> Information Source</label>
+	  		<label><input type="checkbox" onchange="toggleCheck(this,'category','privacy')"> Privacy</label>
 		</div>
 		</td>
 		<td>
-                <div id="nationFilters" class="filter">
-                <p>Provider Nation</p>
-		<select id="nationFilterBox" name="nations" class="filterbox">
-			<option value="all">All Nations</option>
-			<option value="Canada 🇨🇦"> Canada 🇨🇦</option>
-			<option value="Germany 🇩🇪"> Germany 🇩🇪</option>
-			<option value="Switzerland 🇨🇭"> Switzerland 🇨🇭</option>
-			<option value="USA 🇺🇸"> USA 🇺🇸</option>
-		</select>
-		</div>
+        <div id="nationFilters" class="filter">
+        <p><strong>Provider Nation</strong></p>
+        <select id="nationFilterBox" name="nations" class="filterbox">
+            <option value="all">All Nations</option>
+            <option value="Canada 🇨🇦"> Canada 🇨🇦</option>
+            <option value="Germany 🇩🇪"> Germany 🇩🇪</option>
+            <option value="Switzerland 🇨🇭"> Switzerland 🇨🇭</option>
+            <option value="USA 🇺🇸"> USA 🇺🇸</option>
+        </select>
+        </div>
+        <p><br><br>
+        <div id="opensourceFilter" class="filter">
+            <label> Open Source Code Only
+                <input type="checkbox" onchange="toggleCheck(this,'opensourceonly',true)">
+            </label>
+        </div>
+        </p>
 		</td>
+        <td>
+        <div id="categoryFilters" class="filter">
+        <p><strong>Fee Model</strong></p>
+            <label><input type="checkbox" onchange="toggleCheck(this,'cost','free')"> Free</label>
+            <label><input type="checkbox" onchange="toggleCheck(this,'cost','subscription')"> Subscription</label>
+            <label><input type="checkbox" onchange="toggleCheck(this,'cost','one-time fee')"> One-time Fee</label>
+            <label><input type="checkbox" onchange="toggleCheck(this,'cost','freemium')"> Freemium</label>
+        </div>
+        </td>
 		</tr>
 		</table>
 	</div>

@@ -14,6 +14,8 @@ var simpleStore = {
     filters: {
         category: [],
         nation: [],
+        opensourceonly: false,
+        cost: []
     },
 
     // Default settings
@@ -140,6 +142,15 @@ var simpleStore = {
         tmpl.find('.item_description').text(product.description);
     },
 
+    filterOutProduct: function (product) {
+        if(simpleStore.filters.category.length > 0 && simpleStore.filters.category.indexOf(product.category.toLowerCase()) < 0) return true;
+        if(simpleStore.filters.nation.length > 0 && simpleStore.filters.nation.indexOf(product.providernation.toLowerCase()) < 0) return true;
+        if(simpleStore.filters.cost.length > 0 && simpleStore.filters.cost.indexOf(product.cost.toLowerCase()) < 0) return true;
+        if(simpleStore.filters.opensourceonly && product.opensource.toLowerCase() != 'yes' ) return true;
+
+        return false;
+    },
+
     renderProducts: function (products, s) {
 
         var rowCount = 1;
@@ -149,9 +160,7 @@ var simpleStore = {
 
 		if(product.soldOut) return;
 
-		if(simpleStore.filters.category.length > 0 && simpleStore.filters.category.indexOf(product.category.toLowerCase()) < 0) return;
-
-		if(simpleStore.filters.nation.length > 0 && simpleStore.filters.nation.indexOf(product.providernation.toLowerCase()) < 0) return;
+		if(simpleStore.filterOutProduct(product)) return;
 
 		numProducts = numProducts + 1;
 
@@ -184,11 +193,9 @@ var simpleStore = {
 
 				if(product.soldOut) return;
 
-				if(simpleStore.filters.category.length > 0 && simpleStore.filters.category.indexOf(product.category.toLowerCase()) < 0) return;
+                if(simpleStore.filterOutProduct(product)) return;
 
-				if(simpleStore.filters.nation.length > 0 && simpleStore.filters.nation.indexOf(product.providernation.toLowerCase()) < 0) return;
-
-				console.log("Generating "+ product.name);
+				//console.log("Generating "+ product.name);
 				var tmpl = $('#products-template').html(),
 					$tmpl = $(tmpl);
 
@@ -488,19 +495,39 @@ var simpleStore = {
 function filterSelection(c){
 	simpleStore.filters.category = [];
 	simpleStore.filters.nation = [];
+    simpleStore.filters.cost = [];
+    simpleStore.filters.opensourceonly = false;
 	this.document.getElementById('nationFilterBox').selectedIndex = 0;
 	this.document.querySelectorAll('input[type=checkbox]').forEach(el => el.checked = false);
 	simpleStore.render("",simpleStore.settings);
 }
 
-function toggleCategory(element,c){
-	if (element.checked){ 
-		simpleStore.filters.category.push(c.toLowerCase());
-	}
-  	else{
-		var toRemove = simpleStore.filters.category.indexOf(c.toLowerCase());
-		if (toRemove >= 0) simpleStore.filters.category.splice(toRemove,1);
-	}
+function toggleCheck(element,filtertype,c){
+	switch(filtertype){
+        case 'category':
+            if (element.checked){ 
+                simpleStore.filters.category.push(c.toLowerCase());
+            }
+            else{
+                var toRemove = simpleStore.filters.category.indexOf(c.toLowerCase());
+                if (toRemove >= 0) simpleStore.filters.category.splice(toRemove,1);
+            }
+            break;
+        case 'cost':
+            if (element.checked){ 
+                simpleStore.filters.cost.push(c.toLowerCase());
+            }
+            else{
+                var toRemove = simpleStore.filters.cost.indexOf(c.toLowerCase());
+                if (toRemove >= 0) simpleStore.filters.cost.splice(toRemove,1);
+            }
+            break;
+        case 'opensourceonly':
+            simpleStore.filters.opensourceonly = element.checked;
+            break;
+        default:
+            console.log("What did you try to filter?");
+    }
 	simpleStore.render("",simpleStore.settings);
 }
 

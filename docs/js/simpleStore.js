@@ -81,21 +81,62 @@ var simpleStore = {
         }
     },
 
+/*  var product = {
+        productid, name, category, description, link, options, image,
+        cost, provideridentity, ownerdetails, provideraccess, providernation,
+        funding, opensource, requireddata, datalocation, dataaccess, 
+        locationcontrol, selfhost, providerretention, legalobligations, 
+        remedy, bans, vultrans, audit, risks, securityfeatures, 
+        missingfeatures, helpfulguides, usersupport, maintenance, 
+        training, interactions, compatibility, language, localization, 
+        accomodations, sources
+    } */
+
+
     insertData: function (tmpl, product) {
         tmpl.find('.item_thumb').attr("src", product.image);
         tmpl.find('.item_name').text(product.name);
-        tmpl.find('.item_price').text(product.price);
+        tmpl.find('.item_cost').text(product.cost);
         tmpl.find('.item_category').text(product.category);
-        tmpl.find('.item_hostnation').text(product.hostnation);
+        tmpl.find('.item_providernation').text(product.providernation);
         tmpl.find('.item_productid').text(product.id);
-        
+
+        tmpl.find('.item_provideridentity').text(product.provideridentity);
+        tmpl.find('.item_ownerdetails').text(product.ownerdetails);
+        tmpl.find('.item_provideraccess').text(product.provideraccess);
+        tmpl.find('.item_funding').text(product.funding);
+        tmpl.find('.item_opensource').text(product.opensource);
+        tmpl.find('.item_requireddata').text(product.requireddata);
+        tmpl.find('.item_datalocation').text(product.datalocation);
+        tmpl.find('.item_dataaccess').text(product.dataaccess);
+        tmpl.find('.item_locationcontrol').text(product.locationcontrol);
+        tmpl.find('.item_selfhost').text(product.selfhost);
+        tmpl.find('.item_providerretention').text(product.providerretention);
+        tmpl.find('.item_legalobligations').text(product.legalobligations);
+        tmpl.find('.item_remedy').text(product.remedy);
+        tmpl.find('.item_bans').text(product.bans);
+        tmpl.find('.item_vultrans').text(product.vultrans);
+        tmpl.find('.item_audit').text(product.audit);
+        tmpl.find('.item_risks').text(product.risks);
+        tmpl.find('.item_securityfeatures').text(product.securityfeatures);
+        tmpl.find('.item_missingfeatures').text(product.missingfeatures);
+        tmpl.find('.item_helpfulguides').text(product.helpfulguides);
+        tmpl.find('.item_usersupport').text(product.usersupport);
+        tmpl.find('.item_maintenance').text(product.maintenance);
+        tmpl.find('.item_training').text(product.training);
+        tmpl.find('.item_interactions').text(product.interactions);
+        tmpl.find('.item_compatibility').text(product.compatibility);
+        tmpl.find('.item_language').text(product.language);
+        tmpl.find('.item_localization').text(product.localization);
+        tmpl.find('.item_accomodations').text(product.accomodations);
+        tmpl.find('.item_sources').text(product.sources);
+
+
         var link = $('<a />');
         link.attr('href',product.link);
         link.attr('target',"_blank");
         link.text(product.link);
-
         tmpl.find('.item_link').append(link);
-        //tmpl.find('.item_link').text(product.link);
         tmpl.find('.item_description').text(product.description);
     },
 
@@ -110,7 +151,7 @@ var simpleStore = {
 
 		if(simpleStore.filters.category.length > 0 && simpleStore.filters.category.indexOf(product.category.toLowerCase()) < 0) return;
 
-		if(simpleStore.filters.nation.length > 0 && simpleStore.filters.nation.indexOf(product.hostnation.toLowerCase()) < 0) return;
+		if(simpleStore.filters.nation.length > 0 && simpleStore.filters.nation.indexOf(product.providernation.toLowerCase()) < 0) return;
 
 		numProducts = numProducts + 1;
 
@@ -145,7 +186,7 @@ var simpleStore = {
 
 				if(simpleStore.filters.category.length > 0 && simpleStore.filters.category.indexOf(product.category.toLowerCase()) < 0) return;
 
-				if(simpleStore.filters.nation.length > 0 && simpleStore.filters.nation.indexOf(product.hostnation.toLowerCase()) < 0) return;
+				if(simpleStore.filters.nation.length > 0 && simpleStore.filters.nation.indexOf(product.providernation.toLowerCase()) < 0) return;
 
 				console.log("Generating "+ product.name);
 				var tmpl = $('#products-template').html(),
@@ -447,7 +488,6 @@ var simpleStore = {
 function filterSelection(c){
 	simpleStore.filters.category = [];
 	simpleStore.filters.nation = [];
-//	this.document.getElementById('nationFilterBox').options[0].selected = true;
 	this.document.getElementById('nationFilterBox').selectedIndex = 0;
 	this.document.querySelectorAll('input[type=checkbox]').forEach(el => el.checked = false);
 	simpleStore.render("",simpleStore.settings);
@@ -469,7 +509,7 @@ $('#nationFilterBox').on('change', function (e) {
 	var optionSelected = $("option:selected", this);
 	var valueSelected = this.value;    
 	if (!(valueSelected.toLowerCase() === "all")){
-		console.log("New nation: "+this.value);
+		//console.log("New nation: "+this.value);
 		simpleStore.filters.nation.push(this.value.toLowerCase());
 	}
 	simpleStore.render("",simpleStore.settings);

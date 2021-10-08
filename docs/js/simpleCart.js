@@ -26,8 +26,6 @@
 			return typeof HTMLElement === "object" ? o instanceof HTMLElement : typeof o === "object" && o.nodeType === 1 && typeof o.nodeName === "string";
 		},
 
-
-
 		generateSimpleCart = function (space) {
 
 			// stealing this from selectivizr
@@ -36,8 +34,6 @@
 				"Prototype"							: "$$",
 				"jQuery"							: "*"
 			},
-
-
 				// local variables for internal use
 				item_id					= 0,
 				item_id_namespace		= "SCI-",
@@ -59,27 +55,7 @@
 
 				// Currencies
 				currencies = {
-					"USD": { code: "USD", symbol: "&#36;", name: "US Dollar" },
-					"AUD": { code: "AUD", symbol: "&#36;", name: "Australian Dollar" },
-					"BRL": { code: "BRL", symbol: "R&#36;", name: "Brazilian Real" },
-					"CAD": { code: "CAD", symbol: "&#36;", name: "Canadian Dollar" },
-					"CZK": { code: "CZK", symbol: "&nbsp;&#75;&#269;", name: "Czech Koruna", after: true },
-					"DKK": { code: "DKK", symbol: "DKK&nbsp;", name: "Danish Krone" },
-					"EUR": { code: "EUR", symbol: "&euro;", name: "Euro" },
-					"HKD": { code: "HKD", symbol: "&#36;", name: "Hong Kong Dollar" },
-					"HUF": { code: "HUF", symbol: "&#70;&#116;", name: "Hungarian Forint" },
-					"ILS": { code: "ILS", symbol: "&#8362;", name: "Israeli New Sheqel" },
-					"JPY": { code: "JPY", symbol: "&yen;", name: "Japanese Yen", accuracy: 0 },
-					"MXN": { code: "MXN", symbol: "&#36;", name: "Mexican Peso" },
-					"NOK": { code: "NOK", symbol: "NOK&nbsp;", name: "Norwegian Krone" },
-					"NZD": { code: "NZD", symbol: "&#36;", name: "New Zealand Dollar" },
-					"PLN": { code: "PLN", symbol: "PLN&nbsp;", name: "Polish Zloty" },
-					"GBP": { code: "GBP", symbol: "&pound;", name: "Pound Sterling" },
-					"SGD": { code: "SGD", symbol: "&#36;", name: "Singapore Dollar" },
-					"SEK": { code: "SEK", symbol: "SEK&nbsp;", name: "Swedish Krona" },
-					"CHF": { code: "CHF", symbol: "CHF&nbsp;", name: "Swiss Franc" },
-					"THB": { code: "THB", symbol: "&#3647;", name: "Thai Baht" },
-					"BTC": { code: "BTC", symbol: " BTC", name: "Bitcoin", accuracy: 4, after: true	}
+					"USD": { code: "USD", symbol: "&#36;", name: "US Dollar" }
 				},
 
 				// default options
@@ -94,13 +70,9 @@
 						{ attr: "productid", label: "ProductId"},
 						{ view: "remove", text: "Remove", label: false }
 					],
-
 					excludeFromCheckout	: ['thumb','productid'],
-
 					data				: {}
-
 				},
-
 
 				// main simpleCart object, function call is used for setting options
 				simpleCart = function (options) {
@@ -160,7 +132,7 @@
 						// optionally supress event triggers
 						quiet 		= opt_quiet === true ? opt_quiet : false,
 						oldItem;
-
+						console.log(values);
 					// trigger before add event
 					if (!quiet) {
 					  	addItem = simpleCart.trigger('beforeAdd', [newItem]);
@@ -412,7 +384,6 @@
 					return ids;
 
 				},
-
 
 				// storage
 				save: function () {
@@ -890,6 +861,7 @@
 						simpleCart.each(item_options, function (val,k,attr) {
 							send = true;
 							simpleCart.each(settings.excludeFromCheckout, function (field_name) {
+								console.log(attr);
 								if (field_name === attr) { send = false; }
 							});
 							if (send) {

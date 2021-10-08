@@ -18,6 +18,35 @@ a.hover{text-decoration:none}
 .item_price{font-weight:700;font-size:20px;line-height:22px}
 .item_description{margin-top:1rem;margin-bottom:1.5rem}
 .item_productid{display:none}
+.item_provideridentity{display:none}
+.item_ownerdetails{display:none}
+.item_provideraccess{display:none}
+.item_funding{display:none}
+.item_opensource{display:none}
+.item_requireddata{display:none}
+.item_datalocation{display:none}
+.item_dataaccess{display:none}
+.item_locationcontrol{display:none}
+.item_selfhost{display:none}
+.item_providerretention{display:none}
+.item_legalobligations{display:none}
+.item_remedy{display:none}
+.item_bans{display:none}
+.item_vultrans{display:none}
+.item_audit{display:none}
+.item_risks{display:none}
+.item_securityfeatures{display:none}
+.item_missingfeatures{display:none}
+.item_helpfulguides{display:none}
+.item_usersupport{display:none}
+.item_maintenance{display:none}
+.item_training{display:none}
+.item_interactions{display:none}
+.item_compatibility{display:none}
+.item_language{display:none}
+.item_localization{display:none}
+.item_accomodations{display:none}
+.item_sources{display:none}
 .headerRow{display:table-row;font-weight:700;border-bottom:1px solid #e1e1e1}
 .headerRow div{display:table-cell;padding:10px}
 .filter{color:#777}

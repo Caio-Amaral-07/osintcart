@@ -15,10 +15,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- FONT
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
 
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    
     <!-- CSS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="stylesheet" href="css/imports.min.css">
@@ -51,7 +52,7 @@
   			<label><input type="checkbox" onchange="toggleCategory(this,'analysis')"> Analysis</label>
   			<label><input type="checkbox" onchange="toggleCategory(this,'archiving')"> Archiving</label>
 	  		<label><input type="checkbox" onchange="toggleCategory(this,'communications')"> Communications</label>
-  			<label><input type="checkbox" onchange="toggleCategory(this,'fruit')"> Fruit</label>
+  			<label><input type="checkbox" onchange="toggleCategory(this,'fruit')"> Information Source</label>
 	  		<label><input type="checkbox" onchange="toggleCategory(this,'privacy')"> Privacy</label>
 		</div>
 		</td>
@@ -81,7 +82,7 @@
     <script id="products-template" type="x-template">
         <div class="column">
             <div class="simpleCart_shelfItem">
-                <img src="" class="item_thumb"/>
+                <img src="" style="width: 200px;" class="item_thumb"/>
                 <div class="row">
                     <h5 class="item_name"></h5>
 		    <table>
@@ -89,12 +90,12 @@
 		          <td class="item_category"></td>
                        </tr>
                        <tr>
-                          <td class="item_hostnation"></td>
+                          <td class="item_providernation"></td>
                        </tr>
                     </table>
 		    
                     <div class="simpleStore_getDetail_container">
-                        <span class="item_price"></span>
+                        <span class="item_cost"></span>
                     </div>
                     <div class="simpleStore_getDetail_container">
                         <a class="button u-pull-right simpleStore_getDetail">Details</a>
@@ -120,14 +121,49 @@
                     <div class="item_productid" style="display: hidden;"></div>
                     <p class="item_description"></p>
  		  		    <span class="item_category"></span>
-		 		    <span class="item_hostnation"></span>
-                    <span class="item_price"></span>
+		 		    <span class="item_providernation"></span>
+                    <span class="item_cost"></span>
 
                     <div class="qty">
                         <label>QTY</label>
                         <input type="number" value="1" min="1" step="1" class="item_Quantity">
                     </div>
                     <div class="simpleStore_options"></div>
+
+                    <div class="item_provideridentity" style="display: hidden;"></div>
+                    <div class="item_ownerdetails" style="display: hidden;"></div>
+                    <div class="item_provideraccess" style="display: hidden;"></div>
+
+                    <div class="item_funding" style="display: hidden;"></div>
+                    <div class="item_opensource" style="display: hidden;"></div>
+                    <div class="item_requireddata" style="display: hidden;"></div>
+                    <div class="item_datalocation" style="display: hidden;"></div>
+                    <div class="item_dataaccess" style="display: hidden;"></div>
+                    <div class="item_locationcontrol" style="display: hidden;"></div>
+                    <div class="item_selfhost" style="display: hidden;"></div>
+                    <div class="item_providerretention" style="display: hidden;"></div>
+                    <div class="item_legalobligations" style="display: hidden;"></div>
+                    <div class="item_remedy" style="display: hidden;"></div>
+                    <div class="item_bans" style="display: hidden;"></div>
+                    <div class="item_vultrans" style="display: hidden;"></div>
+                    <div class="item_audit" style="display: hidden;"></div>
+                    <div class="item_risks" style="display: hidden;"></div>
+                    <div class="item_securityfeatures" style="display: hidden;"></div>
+                    <div class="item_missingfeatures" style="display: hidden;"></div>
+                    <div class="item_helpfulguides" style="display: hidden;"></div>
+                    <div class="item_usersupport" style="display: hidden;"></div>
+                    <div class="item_maintenance" style="display: hidden;"></div>
+                    <div class="item_training" style="display: hidden;"></div>
+                    <div class="item_interactions" style="display: hidden;"></div>
+                    <div class="item_compatibility" style="display: hidden;"></div>
+                    <div class="item_language" style="display: hidden;"></div>
+                    <div class="item_localization" style="display: hidden;"></div>
+                    <div class="item_accomodations" style="display: hidden;"></div>
+                    <div class="item_sources" style="display: hidden;"></div>
+
+
+
+
                     <a class="item_add button u-pull-right" href="javascript:;">Add to Plan</a>
                 </div>
             </div>
@@ -139,6 +175,7 @@
         <div class="simpleStore_cart">
             <h2>Investigation Plan</h2>
             <a href="#" class="close">&times;</a>
+
 
             <div class="row">
                 <div class="eight columns">

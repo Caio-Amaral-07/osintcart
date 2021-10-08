@@ -86,7 +86,7 @@ simpleStore.plugins.google = (function() {
 					// Build products
 					$(productsData).each(function(i) {
 						if ( i == 0 ) return;
-						var options = this[4];
+						var options = this[5];
 						var setOptions = function(options) {
 							var productOptions = [];
 							if(options) {
@@ -105,16 +105,84 @@ simpleStore.plugins.google = (function() {
 						};
 
 						// Get product values
+						/* 
+						1.  Name	
+						2.  Category
+						3.  Description
+						4.  Link
+						5.  Options
+						6.  Image
+						7.  Cost
+						8.  Provider Identity
+						9.  Owner Details
+						10. Provider Access
+						11. Provider Nation
+						12. Funding
+						13. Open-Source Code
+						14. Required Data
+						15. Data Location
+						16. Data Access
+						17. Location Control
+						18. Self-Host
+						19. Provider Retention 
+						20. Legal obligations
+						21. Remedy
+						22. Bans
+						23. Vulnerability Transparency
+						24. Independent Audit
+						25. Known Risks
+						26. Security Features
+						27. Missing Features
+						28. Helpful Guides
+						29. User Support
+						30. Maintenance
+						31. Training
+						32. Interaction Issues
+						33. Compatibility
+						34. Language
+						35. Localization
+						36. Accommodations
+						37. Sources
+						*/
 						var product = {
 							productid : 1,
-							name : this[1],
-							category : this[3],
-							price : this[2],
-							description : this[5],
-							hostnation : this[11],
-							link : this[10],
+							name : this[1],			
+							category : this[2],
+							description : this[3],
+							link : this[4],
 							options : setOptions(options),
-							image : this[6]
+							image : this[6],
+							cost : this[7],
+							provideridentity : this[8],
+							ownerdetails : this[9],
+							provideraccess : this[10],
+							providernation : this[11],
+							funding : this[12],
+							opensource : this[13],
+							requireddata : this[14],
+							datalocation : this[15],
+							dataaccess : this[16],
+							locationcontrol : this[17],
+							selfhost : this[18],
+							providerretention : this[19],
+							legalobligations : this[20],
+							remedy : this[21],
+							bans : this[22],
+							vultrans : this[23],
+							audit : this[24],
+							risks : this[25],
+							securityfeatures : this[26],
+							missingfeatures : this[27],
+							helpfulguides : this[28],
+							usersupport : this[29],
+							maintenance : this[30],
+							training : this[31],
+							interactions : this[32],
+							compatibility : this[33],
+							language : this[34],
+							localization : this[35],
+							accomodations : this[36],
+							sources : this[37]
 						};
 
 						if (verify) {
